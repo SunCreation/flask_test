@@ -34,7 +34,7 @@ jobs:
         echo Hello
         SESSIONNAME="script"
         tmux has-session -t $SESSIONNAME 2> /dev/null
-        tmux new-session -s $SESSIONNAME -n script -d "/bin/bash"
+        tmux new-session -s $SESSIONNAME -n script -d "/usr/bin/bash"
         tmux ls
         tmux send-keys -t $SESSIONNAME "python3 app_image.py" C-m
         
