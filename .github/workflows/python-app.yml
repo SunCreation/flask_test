@@ -32,9 +32,4 @@ jobs:
     - name: Flask run
       run: |
         echo Hello
-        tmux has-session -t test
-        tmux send-keys -t test "python3 app_image.py" C-m
-        sleep 3
-        echo Hello
-        
-        
+        python3 app_image.py
