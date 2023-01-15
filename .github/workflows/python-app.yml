@@ -28,7 +28,24 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        sudo apt install tmux
     - name: Flask run
       run: |
         echo Hello
-        python3 app_image.py
+        tmux new-session -t test -n script -d "bash"
+        tmux send-keys -t test "python3 app_image.py" C-m
+        
+
+    - name: Checkout
+      uses: actions/checkout@v2
+    
+    - name: Run container
+      run: docker-compose up -d 
+    
+    - uses: luisboto/ngrok-tunnel-action@<VERSION>
+      with:
+        timeout: 1h
+        port: 5000
+        ngrok_authtoken: ${{ secrets.NGROK_AUTHTOKEN }}
+        tunnel_type: http
+        save_url_to_filename: tunnelURL.md
