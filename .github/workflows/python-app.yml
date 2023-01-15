@@ -28,7 +28,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        apt install tmux
     - name: Flask run
       run: |
         echo Hello
-        python3 app_image.py
+        tmux has-session -t test
+        tmux send-keys -t test "python3 app_image.py" C-m
+        sleep 3
+        echo Hello
+        
+        
