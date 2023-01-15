@@ -33,6 +33,7 @@ jobs:
       run: |
         echo Hello
         tmux new-session -t test -n script -d "bash"
+        tmux ls
         tmux send-keys -t test "python3 app_image.py" C-m
         
 
