@@ -1,14 +1,12 @@
 from flask import Flask, render_template, request
-# from flask_ngrok import run_with_ngrok
+from flask_ngrok import run_with_ngrok
+from pyngrok import ngrok
 
 # from project.data import *
 # from project.image import *
 app = Flask(__name__)
-# run_with_ngrok(app)
-
-'''File upload
-'''
-
+ngrok.set_auth_token("2IOZYq7SUPEIAe5YQcI9q6TWGIz_5WQ4rUiXtjSE84h1k5sR6")
+run_with_ngrok(app)
 
 @app.route('/')
 def index():
@@ -52,7 +50,6 @@ def upload_image_file():
         if not file: return render_template('image.html', label="No Files")
         label = file.filename
         file.save('static/'+label)
-
         return render_template('image.html', label=label)
 
 
